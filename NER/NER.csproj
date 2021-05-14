@@ -5,11 +5,11 @@
         <PackageId>NlpToolkit-NER</PackageId>
         <Authors>olcaytaner</Authors>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageVersion>1.0.1</PackageVersion>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="NlpToolkit-AnnotatedSentence" Version="1.0.7" />
-      <PackageReference Include="NlpToolkit-AnnotatedTree" Version="1.0.3" />
+      <PackageReference Include="NlpToolkit-AnnotatedTree" Version="1.0.6" />
     </ItemGroup>
 
 </Project>
