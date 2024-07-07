@@ -15,6 +15,11 @@ namespace NER.AutoProcessor.ParseTree
         {
         }
 
+        /// <summary>
+        /// The method assigns the words "bay" and "bayan" PERSON tag. The method also checks the PERSON gazetteer, and if
+        /// the word exists in the gazetteer, it assigns PERSON tag. The parent node should have the proper noun tag NNP.
+        /// </summary>
+        /// <param name="parseTree">The tree for which PERSON named entities checked.</param>
         protected override void AutoDetectPerson(ParseTreeDrawable parseTree)
         {
             NodeDrawableCollector nodeDrawableCollector = new NodeDrawableCollector((ParseNodeDrawable) parseTree.GetRoot(), new IsTurkishLeafNode());
@@ -30,6 +35,10 @@ namespace NER.AutoProcessor.ParseTree
             }
         }
 
+        /// <summary>
+        /// The method checks the LOCATION gazetteer, and if the word exists in the gazetteer, it assigns the LOCATION tag.
+        /// </summary>
+        /// <param name="parseTree">The tree for which LOCATION named entities checked.</param>
         protected override void AutoDetectLocation(ParseTreeDrawable parseTree)
         {
             NodeDrawableCollector nodeDrawableCollector = new NodeDrawableCollector((ParseNodeDrawable) parseTree.GetRoot(), new IsTurkishLeafNode());
@@ -42,10 +51,15 @@ namespace NER.AutoProcessor.ParseTree
             }
         }
 
+        /// <summary>
+        /// The method assigns the words "corp.", "inc.", and "co" ORGANIZATION tag. The method also checks the
+        /// ORGANIZATION gazetteer, and if the word exists in the gazetteer, it assigns ORGANIZATION tag.
+        /// </summary>
+        /// <param name="parseTree">The tree for which ORGANIZATION named entities checked.</param>
         protected override void AutoDetectOrganization(ParseTreeDrawable parseTree)
         {
-            NodeDrawableCollector nodeDrawableCollector = new NodeDrawableCollector((ParseNodeDrawable) parseTree.GetRoot(), new IsTurkishLeafNode());
-            List<ParseNodeDrawable> leafList = nodeDrawableCollector.Collect();
+            var nodeDrawableCollector = new NodeDrawableCollector((ParseNodeDrawable) parseTree.GetRoot(), new IsTurkishLeafNode());
+            var leafList = nodeDrawableCollector.Collect();
             foreach (var parseNode in leafList){
                 if (!parseNode.LayerExists(ViewLayerType.NER)){
                     String word = parseNode.GetLayerData(ViewLayerType.TURKISH_WORD).ToLower(new CultureInfo("tr"));
@@ -57,6 +71,11 @@ namespace NER.AutoProcessor.ParseTree
             }
         }
 
+        /// <summary>
+        /// The method checks for the MONEY entities using regular expressions. After that, if the expression is a MONEY
+        /// expression, it also assigns the previous nodes, which may included numbers or some monetarial texts, MONEY tag.
+        /// </summary>
+        /// <param name="parseTree">The tree for which MONEY named entities checked.</param>
         protected override void AutoDetectMoney(ParseTreeDrawable parseTree)
         {
             NodeDrawableCollector nodeDrawableCollector = new NodeDrawableCollector((ParseNodeDrawable) parseTree.GetRoot(), new IsTurkishLeafNode());
@@ -82,6 +101,11 @@ namespace NER.AutoProcessor.ParseTree
             }
         }
 
+        /// <summary>
+        /// The method checks for the TIME entities using regular expressions. After that, if the expression is a TIME
+        /// expression, it also assigns the previous texts, which are numbers, TIME tag.
+        /// </summary>
+        /// <param name="parseTree">The tree for which TIME named entities checked.</param>
         protected override void AutoDetectTime(ParseTreeDrawable parseTree)
         {
             NodeDrawableCollector nodeDrawableCollector = new NodeDrawableCollector((ParseNodeDrawable) parseTree.GetRoot(), new IsTurkishLeafNode());
