@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
         <PackageId>NlpToolkit-NER</PackageId>
         <Authors>olcaytaner</Authors>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageVersion>1.0.2</PackageVersion>
+        <TargetFrameworks>netcoreapp3.1;net8.0</TargetFrameworks>
     </PropertyGroup>
 
     <ItemGroup>
